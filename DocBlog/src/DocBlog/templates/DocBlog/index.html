@@ -1,12 +1,17 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="{%static 'css/style.css'%}">
 </head>
 <body>
+<div class="container">
     <h1>Bonjour bienvenue sur mon site internet</h1>
     <h2>Aujourd'hui nous sommes le {{Date|date:"d F Y"}}</h2>
-    <h3>Et il est actuellement {{Date|time:"H:i:s"}}</h3>
+    <h3>Et il est actuellement {{Date|date:"H\hi"}}</h3>
+</div>
+
 </body>
 </html>
