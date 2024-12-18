@@ -1,4 +1,4 @@
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import render_to_string
@@ -11,7 +11,7 @@ def blog_post(request):
 def blog_post_(request):
     blogpost=get_object_or_404(BlogPost, pk=0)
     return  HttpResponse(blogpost.content)
-
+@user_passes_test(lambda u: u.username=="DaniloWaffis")
 def blog_posts(request,slug):
     post = BlogPost.objects.get(slug =slug)
     return render(request, "blog/blog.html", context={"blog_posts":post})
