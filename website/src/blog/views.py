@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import render_to_string
@@ -6,9 +7,9 @@ from .models import BlogPost
 
 def blog_post(request):
     return redirect("https://google.com")
-
+@login_required
 def blog_post_(request):
-    blogpost=get_object_or_404(BlogPost, pk=5)
+    blogpost=get_object_or_404(BlogPost, pk=0)
     return  HttpResponse(blogpost.content)
 
 def blog_posts(request,slug):
