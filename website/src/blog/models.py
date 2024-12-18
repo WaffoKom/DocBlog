@@ -22,10 +22,17 @@ class BlogPost(models.Model):
     content = models.TextField()
     description = models.TextField()
 
-    # def publish_string(self):
-    #     if self.publish:
-    #         return "L'article a ete publier"
-    #     return "L'article n'as pas ete publier"
+    def content_word(self):
+        if not self.content:
+            return "Le blog ne contient aucun article"
+        else:
+            article = len(self.content.split())
+            return  f"L'article contient f{article} mot(s)"
+
+    def publish_string(self):
+        if self.publish:
+            return "L'article a ete publier"
+        return "L'article n'as pas ete publier"
 
     def save(self, *args, **kwargs):
         if not self.slug or self.slug == "":
