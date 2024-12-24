@@ -26,8 +26,8 @@ class BlogPost(models.Model):
         if not self.content:
             return "Le blog ne contient aucun article"
         else:
-            article = len(self.content.split())
-            return  f"L'article contient f{article} mot(s)"
+            word_count = len(self.content.split())
+            return  f"L'article contient f{word_count} mot(s)"
 
     def publish_string(self):
         if self.publish:

@@ -2,11 +2,12 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>{{blog_posts.title}}</title>
+    <title>{{post.title}}</title>
 </head>
 <body>
-<h1>Fichier de template :{{blog_posts.title}}</h1>
-<p>{{blog_posts.description}}</p>
-{{blog_posts.content_word}}
+<a href="{% url 'blog-posts' %}">Retour au sommaire</a>
+<h1>{{ post.title|safe}}</h1>
+<p>{{forloop.content|safe}}</p>
+
 </body>
 </html>
