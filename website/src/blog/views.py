@@ -5,6 +5,7 @@ from django.template.loader import render_to_string
 from .models import BlogPost
 
 
+
 def blog_posts(request):
     posts = BlogPost.objects.all()
     print(posts)
