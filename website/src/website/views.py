@@ -8,5 +8,13 @@ def index(request):
     return HttpResponse("Accueil du site")
 
 def signup(request):
-    form =SignUpForms()
+    if request.method == "POST":
+        form =SignUpForms(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+            return HttpResponse("Merci pour l'inscription sur le site")
+    else:
+        form = SignUpForms()
+
+
     return  render(request, "accounts/signup.html",context={"form" :form})

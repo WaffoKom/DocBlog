@@ -6,7 +6,8 @@
 </head>
 <body>
     <h1>Creer un Compte</h1>
-    <form>
+    <form method="POST">
+        {% csrf_token %}
         {{ form.as_div}}
         <input type="submit" value="S'inscrire">
     </form>
