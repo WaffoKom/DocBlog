@@ -10,7 +10,8 @@ from django.utils.text import slugify
 class Categories(models.Model):
     name = models.CharField(max_length=30)
     slug = models.SlugField()
-
+    def __str__(self):
+        return self.name
 
 class BlogPost(models.Model):
     author = models.ForeignKey(User, on_delete=SET_NULL, null=True)
