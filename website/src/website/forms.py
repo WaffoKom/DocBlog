@@ -29,6 +29,7 @@ class BlogPostForm(forms.ModelForm):
             "date",
             "category",
             "description",
+            "publish"
 
         ]
         labels ={

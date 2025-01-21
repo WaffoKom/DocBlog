@@ -24,7 +24,7 @@ urlpatterns = [
     path("", index, name="home"),
     path("form/", signup, name="form"),
     path("post/", blog_post, name="BlogPostForm"),
-    path('admin/', admin.site.urls),
+    path('custom-admin/', admin.site.urls),
     path('blog/', include("blog.urls")),
 
 ]

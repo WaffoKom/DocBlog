@@ -21,6 +21,7 @@ def blog_post(request):
     if request.method =="POST":
         form =BlogPostForm(request.POST)
         if form.is_valid():
+            form.save()
             print(form.cleaned_data)
             return HttpResponse("Merci pour l'inscription sur le site")
     else:
