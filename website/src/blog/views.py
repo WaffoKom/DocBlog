@@ -6,8 +6,10 @@ from .models import BlogPost
 from django.views.generic import DetailView, TemplateView, ListView
 
 
-class HomeView(ListView):
+class BlogIndexView(ListView):
     model = BlogPost
+    template_name = "blog/index.html"
+
 def blog_posts(request):
     posts = BlogPost.objects.all()
     print(posts)
