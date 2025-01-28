@@ -1,10 +1,20 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from .forms import SignUpForms, BlogPostForm
+from django.views.generic import TemplateView
 
 
-def index(request):
-    return HttpResponse("Accueil du site")
+class HomeView(TemplateView):
+    template_name ="index.html"
+
+def get_context_data(self, **kwargs):
+    context =super().get_context_data(**kwargs)
+    context["title"]="Accueil du site"
+    return context
+
+
+def home(request):
+    return render(request, "index.html", {"title" :"Accueil du site"})
 
 def signup(request):
     if request.method == "POST":

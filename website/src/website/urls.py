@@ -14,14 +14,17 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from tkinter.font import names
+
 
 from django.contrib import admin
 from django.urls import path,include
-from .views import index, signup,blog_post
+# from django.views import View
+from .views import HomeView, blog_post, signup
 
 urlpatterns = [
-    path("", index, name="home"),
+    path('', HomeView.as_view(), name="home"),
+    path("about/", HomeView.as_view(), name="about"),
+    # path("home/", index, name="home"),
     path("form/", signup, name="form"),
     path("post/", blog_post, name="BlogPostForm"),
     path('custom-admin/', admin.site.urls),
