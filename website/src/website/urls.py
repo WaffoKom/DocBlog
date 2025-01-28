@@ -19,12 +19,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 # from django.views import View
-from .views import HomeView, blog_post, signup
+from .views import HomeView ,signup
+from blog.views import  blog_post
 
 urlpatterns = [
-    path('', HomeView.as_view(), name="home"),
-    path("about/", HomeView.as_view(), name="about"),
-    # path("home/", index, name="home"),
+    path('', HomeView.as_view(title="Accueil du site"), name="home"),
+    path("about/", HomeView.as_view(title="A propos"), name="about"),
     path("form/", signup, name="form"),
     path("post/", blog_post, name="BlogPostForm"),
     path('custom-admin/', admin.site.urls),
