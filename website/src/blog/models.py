@@ -11,8 +11,10 @@ from django.urls import reverse
 class Categories(models.Model):
     name = models.CharField(max_length=30)
     slug = models.SlugField()
+
     def __str__(self):
         return self.name
+
 
 class BlogPost(models.Model):
     author = models.ForeignKey(User, on_delete=SET_NULL, null=True)
@@ -23,20 +25,23 @@ class BlogPost(models.Model):
     date = models.DateField(blank=True, null=True)
     content = models.TextField()
     description = models.TextField()
+
     class Meta:
-        verbose_name ="Article"
-        ordering =['-date', '-publish']
+        verbose_name = "Article"
+        ordering = ['-date', '-publish']
 
     def __str__(self):
         return self.title
+
     def get_absolute_url(self):
-        return  reverse("blog-post", kwargs={"slug" :self.slug})
+        return reverse("blog-post", kwargs={"slug": self.slug})
+
     def content_word(self):
         if not self.content:
             return "Le blog ne contient aucun article"
         else:
             word_count = len(self.content.split())
-            return  f"L'article contient f{word_count} mot(s)"
+            return f"L'article contient f{word_count} mot(s)"
 
     def publish_string(self):
         if self.publish:
@@ -47,6 +52,7 @@ class BlogPost(models.Model):
         if not self.slug or self.slug == "":
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
+
     @property
     def word_count(self):
         return len(self.content.split())
