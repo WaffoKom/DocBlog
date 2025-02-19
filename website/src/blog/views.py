@@ -1,11 +1,11 @@
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
 # from django.template.loader import render_to_string
 from .models import BlogPost
-from django.views.generic import DetailView, TemplateView, ListView
+from django.views.generic import DetailView, TemplateView, ListView, CreateView, UpdateView
 
 from .forms import BlogPostForm
 
@@ -20,7 +20,35 @@ class BlogPostDetailView(DetailView):
     model = BlogPost
     template_name = "blog/post.html"
     context_object_name = "post"
+class BlogPostCreateView(CreateView):
+    model = BlogPost
+    template_name = "blog/create_post.html"
+    form_class = BlogPostForm
+    success_url = reverse_lazy("blog-index")
+    def form_valid(self, form):
+        if self.request.user.is_authenticated:
+            form.instance.author =self.request.user
+        form.instance.publish =True
+        return  super().form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["submit_text"] = "Creer"
+        return context
+
+class BlogPostUpdateView(UpdateView):
+    model = BlogPost
+    template_name = "blog/create_post.html"
+    form_class = BlogPostForm
+    def get_context_data(self, **kwargs):
+        context =super().get_context_data(**kwargs)
+        context["submit_text"] ="Modifier"
+        return  context
+class BlogPostDeleteView(DetailView):
+    model = BlogPost
+    template_name = "blog/delete_post.html"
+    context_object_name = "post"
+    success_url =reverse_lazy("blog-index")
 
 def blog_post_create(request):
     if request.method =="POST":
